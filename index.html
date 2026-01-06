@@ -46,7 +46,20 @@
             display: flex; flex-direction: column; justify-content: space-between;
             z-index: 100;
         }
-        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; }
+        .logo { 
+            font-weight: 800; 
+            font-size: 1.5rem; 
+            letter-spacing: -0.02em; 
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Icon and text gap */
+            line-height: 1.2;
+        }
+        
+        .pc-br { display: block; }
+        @media (max-width: 900px) {
+            .pc-br { display: none; }
+        }
         
         /* サイドバーの説明文 */
         .sidebar-desc { 
@@ -76,7 +89,7 @@
         #intro {
             top: 2rem; z-index: 1;
             justify-content: flex-end;
-            background-image: url('image/meiou_hero.png'); /* トップ画像の設定 */
+            background-image: url('image/image8.JPG'); /* トップ画像の設定 */
             background-size: cover; background-position: center;
             color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
@@ -169,6 +182,33 @@
             .proj-img { height: 200px; }
             #intro { min-height: 50vh; }
             #recruit { padding: 2rem; margin-top: 0 !important; width: 100%; box-sizing: border-box; }
+            .btn-instagram { 
+                width: 100%; 
+                text-align: center; 
+                box-sizing: border-box; /* Vital for width: 100% + padding */
+                padding: 15px 10px;    /* Reduce side padding */
+                font-size: 0.95rem !important; /* Smaller text for mobile to fit */
+                white-space: nowrap; /* Try to keep on one line */
+            }
+        }
+
+        /* Instagram Button */
+        .btn-instagram {
+            display: inline-block;
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            color: #fff !important;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none !important;
+            font-weight: bold;
+            font-size: 1.2rem !important;
+            margin-top: 2rem;
+            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn-instagram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(220, 39, 67, 0.6);
         }
     </style>
 </head>
@@ -233,7 +273,8 @@
                 <div class="card-body">
                     <h2 style="font-size: 3rem;">Ready to build?</h2>
                     <p style="color: #999;">私たちが提案するのは、単なる建物ではありません。<br>未来への基盤です。</p>
-                    <a href="#" id="mail-link" style="color: #fff; font-size: 1.5rem; margin-top: 2rem; display: inline-block;"></a>
+                    <a href="#" id="mail-link" style="color: #fff; font-size: 1.5rem; margin-top: 2rem; display: inline-block; text-decoration: underline;"></a>
+                    <p style="margin-top: 1rem; color: #fff;">TEL: <a href="tel:0977-26-5851" style="color: #fff; text-decoration: none;">0977-26-5851</a></p>
                 </div>
             </section>
         </main>
@@ -254,7 +295,7 @@
         // ===============================================
         const config = {
             // 1. サイトのタイトル・ブランド名
-            name: "株式会社明王総建",
+            name: "株式会社<br class='pc-br'>明王総建",
             
             // 2. サイドバーの説明文（\n で改行）
             description: "大分県別府市を拠点とする建設会社です。\n\n土木一式工事・とび・土工・コンクリート工事・解体工事のプロフェッショナルとして、地域の基盤を支えます。",
@@ -282,9 +323,9 @@
 
             // 採用情報
             recruit: [
-                { label: "募集職種", value: "重機オペレーター / トラック・ダンプ運転手 / 作業員" },
+                { label: "応募職種", value: "重機オペレーター / トラック・ダンプ運転手 / 作業員" },
                 { label: "雇用形態", value: "正社員 / アルバイト（随時募集）" },
-                { label: "日給", value: "土木作業員：8,000円〜12,000円<br>重機オペレーター：12,000円〜14,000円" },
+                { label: "日給", value: "土木作業員：9,000円〜12,000円<br>重機オペレーター：12,000円〜14,000円" },
                 { label: "待遇・福利厚生", value: "寮完備、資格取得支援制度あり" },
                 { label: "応募資格", value: "未経験者大歓迎、経験者・有資格者優遇" },
                 { label: "仕事内容", value: "公共土木工事、太陽光造成工事、宅地造成工事、水道工事、外構工事、解体工事" }
@@ -303,7 +344,9 @@
             
             // 8. お問い合わせメールアドレス (今回は電話番号メインのためリンク先変更または空)
             // ここでは表示用として電話番号を入れるか、メールがあれば入れる
-            email: "0977-26-5851" 
+            // 8. お問い合わせメールアドレス (今回は電話番号メインのためリンク先変更または空)
+            email: "0977-26-5851",
+            instagram: "https://www.instagram.com/meiou.so_uken/" 
         };
 
         // ===============================================
@@ -312,20 +355,26 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             // テキストデータの反映処理
-            document.getElementById('brand-logo').textContent = config.name;
+            document.getElementById('brand-logo').innerHTML = `
+                <img src="image/logo_icon.jpg" alt="Logo" style="height: 50px; width: auto; object-fit: contain;">
+                <span>${config.name}</span>
+            `;
             document.getElementById('sidebar-contact').innerHTML = config.address;
             document.getElementById('sidebar-desc').textContent = config.description;
 
             document.getElementById('hero-title').innerHTML = config.hero;
             document.getElementById('philo-text').innerHTML = config.philo;
-            document.getElementById('mail-link').textContent = config.email;
-            document.getElementById('mail-link').textContent = config.email;
-            // 電話番号の場合は tel: 、それ以外は mailto: とする簡易判定
-            if (/^[\d-]+$/.test(config.email)) {
-                document.getElementById('mail-link').href = `tel:${config.email}`;
-            } else {
-                document.getElementById('mail-link').href = `mailto:${config.email}`;
-            }
+            
+            const mailLink = document.getElementById('mail-link');
+            mailLink.textContent = "Instagram DM";
+            mailLink.href = config.instagram;
+            mailLink.target = "_blank";
+            mailLink.className = "btn-instagram";
+            
+            // Remove previous inline styles that might conflict (optional, but cleaner)
+            mailLink.style.color = ""; 
+            mailLink.style.textDecoration = "";
+            mailLink.style.fontSize = "";
 
             // 会社概要テーブルの生成
             const cTable = document.getElementById('company-data');
@@ -357,11 +406,17 @@
             const loadPromises = [];
 
             // 画像の存在確認
-            for (let i = 1; i <= maxImages; i++) {
-                const imgPath = `image/image${i}.jpg`;
+            const imagesToLoad = [
+                'image/image1.jpg', 'image/image2.jpg', 'image/image3.jpg', 
+                'image/image4.jpg', 'image/image5.jpg', 
+                'image/image6.JPG', 'image/image7.JPG'
+                // image8 is used for Main Visual
+            ];
+
+            imagesToLoad.forEach((imgPath, i) => {
                 // メタデータがない場合はデフォルト値を設定
-                const meta = config.workMeta[i - 1] || { 
-                    title: `Project ${String(i).padStart(2, '0')}`, 
+                const meta = config.workMeta[i] || { 
+                    title: `Project ${String(i + 1).padStart(2, '0')}`, 
                     loc: "Japan" 
                 };
 
@@ -372,7 +427,7 @@
                     img.onerror = () => resolve({ status: false });
                 });
                 loadPromises.push(p);
-            }
+            });
 
             // 読み込み完了後に一覧を表示
             Promise.all(loadPromises).then(results => {
