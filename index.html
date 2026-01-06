@@ -94,6 +94,12 @@
             min-height: 50vh;
         }
 
+        #recruit {
+            position: relative; top: auto; z-index: 6;
+            margin-top: 0; padding-bottom: 5rem;
+            background: #f9f9f9;
+        }
+
         .hero-title { font-size: 4rem; font-weight: 300; line-height: 1.1; margin: 0; }
         .hero-title strong { font-weight: 800; display: block; }
 
@@ -162,6 +168,7 @@
             .proj-grid { grid-template-columns: 1fr; }
             .proj-img { height: 200px; }
             #intro { min-height: 50vh; }
+            #recruit { padding: 2rem; margin-top: 0 !important; width: 100%; box-sizing: border-box; }
         }
     </style>
 </head>
@@ -207,9 +214,21 @@
                 <div id="proj-container" class="proj-grid"></div>
             </section>
 
+            <section id="recruit" class="sticky-card">
+                <div class="card-header">
+                    <span class="card-label">04 / Recruitment</span>
+                </div>
+                <div class="card-body">
+                    <h2 style="font-size: 2rem; margin-bottom: 2rem;">Join Us.</h2>
+                    <p>私たちと共に、地域の基盤を支える仲間を募集しています。</p>
+                    <table class="company-table" id="recruit-data">
+                    </table>
+                </div>
+            </section>
+
             <section id="contact" class="sticky-card">
                 <div class="card-header" style="border-color: #555;">
-                    <span class="card-label">04 / Contact</span>
+                    <span class="card-label">05 / Contact</span>
                 </div>
                 <div class="card-body">
                     <h2 style="font-size: 3rem;">Ready to build?</h2>
@@ -250,25 +269,36 @@
             philo: "確かな技術と信頼で、未来への礎を築く。<br>私たちは土木・解体工事を通じて、<br>安全で安心できる地域社会の創造に貢献します。",
 
             // 6. 会社概要のデータリスト
+            // 6. 会社概要のデータリスト
             company: [
                 { label: "会社名", value: "株式会社明王総建" },
                 { label: "代表取締役", value: "木津　剛" },
                 { label: "設立", value: "2012年" },
-                { label: "資本金", value: "500千円" },
                 { label: "所在地", value: "大分県別府市大字鶴見2641-1" },
                 { label: "許可業種", value: "土木一式工事、とび・土工・コンクリート工事、解体工事" },
                 { label: "建設業許可", value: "大分県知事許可　一般" },
                 { label: "Instagram", value: "<a href='https://www.instagram.com/meiou.so_uken/' target='_blank'>@meiou.so_uken</a>" }
+            ],
+
+            // 採用情報
+            recruit: [
+                { label: "募集職種", value: "重機オペレーター / トラック・ダンプ運転手 / 作業員" },
+                { label: "雇用形態", value: "正社員 / アルバイト（随時募集）" },
+                { label: "日給", value: "土木作業員：8,000円〜12,000円<br>重機オペレーター：12,000円〜14,000円" },
+                { label: "待遇・福利厚生", value: "寮完備、資格取得支援制度あり" },
+                { label: "応募資格", value: "未経験者大歓迎、経験者・有資格者優遇" },
+                { label: "仕事内容", value: "公共土木工事、太陽光造成工事、宅地造成工事、水道工事、外構工事、解体工事" }
             ],
             
             // 7. 実績（Works）のタイトルと場所
             // ※画像ファイルは image/image1.jpg, image2.jpg... と連番で保存してください
             // ※下のリストは画像の番号順に対応しています（1番目、2番目...）
             workMeta: [
-                { title: "Civil Engineering", loc: "Oita, Japan" },
-                { title: "Scaffolding Works", loc: "Oita, Japan" },
                 { title: "Concrete Works", loc: "Oita, Japan" },
-                { title: "Demolition Works", loc: "Oita, Japan" }
+                { title: "Site Preparation", loc: "Oita, Japan" },
+                { title: "Exterior Works", loc: "Oita, Japan" },
+                { title: "Civil Engineering", loc: "Oita, Japan" },
+                { title: "Land Development", loc: "Oita, Japan" }
             ],
             
             // 8. お問い合わせメールアドレス (今回は電話番号メインのためリンク先変更または空)
@@ -304,6 +334,16 @@
                     const tr = document.createElement('tr');
                     tr.innerHTML = `<th>${item.label}</th><td>${item.value}</td>`;
                     cTable.appendChild(tr);
+                });
+            }
+
+            // 採用情報テーブルの生成
+            const rTable = document.getElementById('recruit-data');
+            if(rTable && config.recruit) {
+                config.recruit.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<th>${item.label}</th><td>${item.value}</td>`;
+                    rTable.appendChild(tr);
                 });
             }
 
